@@ -71,17 +71,20 @@ public class TicketController {
     
     @RequestMapping(value = "listlecture", method = RequestMethod.GET)
     public String listlecture(ModelMap model) {
-        model.addAttribute("ticketDatabase", ticketRepo);
+        String type="lecture";
+        model.addAttribute("ticketDatabase", ticketRepo.findByCategories(type));
         return "listlecture";
     }
     @RequestMapping(value = "listlab", method = RequestMethod.GET)
     public String listlab(ModelMap model) {
-        model.addAttribute("ticketDatabase", ticketRepo);
+        String type="lab";
+        model.addAttribute("ticketDatabase", ticketRepo.findByCategories(type));
         return "listlab";
     }
     @RequestMapping(value = "listother", method = RequestMethod.GET)
     public String listother(ModelMap model) {
-        model.addAttribute("ticketDatabase", ticketRepo);
+        String type="other";
+        model.addAttribute("ticketDatabase", ticketRepo.findByCategories(type));
         return "listother";
     }
 
