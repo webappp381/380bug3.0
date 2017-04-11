@@ -8,5 +8,7 @@ public interface TicketRepository {
     public List<Ticket> findAll();
     public Ticket findById(int id);
     public int maxId();
+    public List<Ticket> findByCategories(String type);
   //  public void deleteByUsername(String username);
 }
+
