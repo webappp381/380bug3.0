@@ -26,16 +26,16 @@
             </c:when>
             <c:otherwise>
                 <c:forEach items="${ticketDatabase}" var="entry2">
-                    <c:if test="${entry2.value.categories == 'lecture'}" >
-                        Post #${entry2.key}:
-                        <a href="<c:url value="/ticket/view/${entry2.key}" />"> 
-                            <c:out value="${entry2.value.subject}" /></a>
-                        (Post by: <c:out value="${entry2.value.customerName}" />)                                        
-                    <security:authorize access="hasRole('ADMIN') or principal.username=='${entry2.value.customerName}'">            
-                        [<a href="<c:url value="/ticket/edit/${entry2.key}" />">Edit</a>]
+                    <c:if test="${entry2.categories == 'lecture'}" >
+                        Post #${entry2.id}:
+                        <a href="<c:url value="/ticket/view/${entry2.id}" />"> 
+                            <c:out value="${entry2.subject}" /></a>
+                        (Post by: <c:out value="${entry2.customerName}" />)                                        
+                    <security:authorize access="hasRole('ADMIN') or principal.username=='${entry2.customerName}'">            
+                        [<a href="<c:url value="/ticket/edit/${entry2.id}" />">Edit</a>]
                     </security:authorize>
                     <security:authorize access="hasRole('ADMIN')">            
-                        [<a href="<c:url value="/ticket/delete/${entry2.key}" />">Delete</a>]
+                        [<a href="<c:url value="/ticket/delete/${entry2.id}" />">Delete</a>]
                     </security:authorize>
                     <hr>
                     </c:if>             
