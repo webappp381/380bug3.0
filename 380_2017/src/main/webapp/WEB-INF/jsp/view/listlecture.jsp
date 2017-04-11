@@ -19,6 +19,7 @@
         <a href="<c:url value="/ticket/listlecture" />">lecture</a>
         <a href="<c:url value="/ticket/listlab" />">lab</a>
         <a href="<c:url value="/ticket/listother" />">other</a>
+        <a href="<c:url value="/ticket/list" />">all</a>
         <br /><br />
         <c:choose>
             <c:when test="${fn:length(ticketDatabase) == 0}">
