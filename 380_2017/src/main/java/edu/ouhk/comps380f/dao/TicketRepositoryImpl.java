@@ -109,7 +109,48 @@ public class TicketRepositoryImpl implements TicketRepository {
         int id=(int)idobject.getId();
         return id;
     }
-
+    private static final String SQL_SELECT_LAB
+            = "select * from ticket where categories = 'lab'";
+    private static final String SQL_SELECT_LECTURE
+            = "select * from ticket where categories = 'lecture'";
+    private static final String SQL_SELECT_OTHER
+            = "select * from ticket where categories = 'other'";
+    @Override
+    public List<Ticket> findByCategories(String type) {
+        List<Map<String, Object>> rows=null;
+        List<Ticket> tickets2 = new ArrayList<>();
+        if(type=="lab"){
+          rows = jdbcOp.queryForList(SQL_SELECT_LAB);
+        }
+        if(type=="lecture"){
+          rows = jdbcOp.queryForList(SQL_SELECT_LECTURE);
+        }
+        if(type=="other"){
+          rows = jdbcOp.queryForList(SQL_SELECT_OTHER);
+        }
+        
+        for (Map<String, Object> row : rows) {
+            Ticket ticket = new Ticket();
+            
+            int id = (int)row.get("id");
+            ticket.setId(id);       
+            
+            String customername = (String)row.get("customername");
+            ticket.setCustomerName(customername);  
+            
+            String subject = (String)row.get("subject");
+            ticket.setSubject(subject);
+            
+            String body = (String)row.get("body");
+            ticket.setBody(body);
+            
+            String categories = (String)row.get("categories");
+            ticket.setCategories(categories);
+            
+            tickets2.add(ticket);
+        }
+        return tickets2;
+    }
 //    private static final String SQL_DELETE_USER
 //            = "delete from users where username = ?";
 //    private static final String SQL_DELETE_ROLES
